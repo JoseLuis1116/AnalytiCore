@@ -1,7 +1,7 @@
 # Diagrama de componentes de AnalytiCore
 
 ```mermaid
-flowchart LR
+flowchart TB
     U[Usuario]
 
     subgraph CLOUD[Plataforma en la nube]
