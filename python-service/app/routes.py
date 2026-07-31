@@ -8,7 +8,6 @@ from app.database import get_db
 from app.models import Job
 from app.schemas import JobCreate, JobResponse
 
-
 router = APIRouter()
 
 JAVA_SERVICE_URL = os.getenv(

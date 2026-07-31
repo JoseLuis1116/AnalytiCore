@@ -1,0 +1,34 @@
+# Normalizacion general
+* text=auto
+
+# Archivos del proyecto: conservar LF
+Dockerfile text eol=lf
+*.conf text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+*.java text eol=lf
+*.js text eol=lf
+*.jsx text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.properties text eol=lf
+*.py text eol=lf
+*.sh text eol=lf
+*.toml text eol=lf
+*.xml text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+
+# Scripts de Windows
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Documentos y recursos binarios
+*.docx binary
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary

@@ -13,15 +13,25 @@ RUN mvn clean package -DskipTests
 
 FROM eclipse-temurin:21-jre
 
-WORKDIR /app
-
 RUN apt-get update \
     && apt-get install -y --no-install-recommends curl \
+    && groupadd --gid 10001 appgroup \
+    && useradd \
+        --uid 10001 \
+        --gid appgroup \
+        --create-home \
+        --home-dir /home/appuser \
+        --shell /bin/false \
+        appuser \
     && rm -rf /var/lib/apt/lists/*
 
-COPY --from=build \
+WORKDIR /app
+
+COPY --chown=appuser:appgroup --from=build \
     /app/target/java-service-0.0.1-SNAPSHOT.jar \
     app.jar
+
+USER appuser
 
 EXPOSE 8080
 

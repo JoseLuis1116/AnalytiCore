@@ -1,0 +1,51 @@
+name: Java CI
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "java-service/**"
+      - ".github/workflows/java-ci.yml"
+
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "java-service/**"
+      - ".github/workflows/java-ci.yml"
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  java:
+    name: Test and build
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: java-service
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+          cache-dependency-path: java-service/pom.xml
+
+      - name: Allow Maven Wrapper execution
+        run: chmod +x mvnw
+
+      - name: Run tests and build
+        run: ./mvnw clean verify
+
+      - name: Verify generated JAR
+        run: test -f target/java-service-0.0.1-SNAPSHOT.jar
