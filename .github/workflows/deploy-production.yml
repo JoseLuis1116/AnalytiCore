@@ -96,11 +96,15 @@ jobs:
       - name: Run Ruff
         if: inputs.service == 'python' || inputs.service == 'all'
         working-directory: python-service
+        env:
+            PYTHONPATH: .
         run: ruff check app tests
 
       - name: Run Python tests
         if: inputs.service == 'python' || inputs.service == 'all'
         working-directory: python-service
+        env:
+            PYTHONPATH: .
         run: pytest -v
 
       - name: Build Python Docker image
